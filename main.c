@@ -3,7 +3,8 @@
 
 int main()
 {
-    int opcao,quantidadePlantas,valorMenor=0,valorMaior=0;
+    int opcao,quantidadePlantas,valorMenor=0,valorMaior=0,estoqueAtual=0,quantidadeEstoque=50,estoqueIdeal=30;
+    int estoqueMinimo;
     char plantaCara[30],plantaBarata[30];
     float media,soma=0,valorPlanta;
     char nomePlanta[50];
@@ -14,7 +15,8 @@ int main()
         printf("3 - Planta mais cara\n");
         printf("4 - Planta mais barata\n");
         printf("5 - Valor total das plantas\n");
-        printf("6 - Sair\n");
+        printf("6 - Verificar estoque\n");
+        printf("7 - Sair\n");
         printf("Opcao: ");
         scanf("%d",&opcao);
         if (opcao == 1) {
@@ -24,6 +26,8 @@ int main()
             scanf("%f",&valorPlanta);
             printf("Entre com a quantidade de plantas compradas: ");
             scanf("%d",&quantidadePlantas);
+            estoqueAtual = (quantidadeEstoque - quantidadePlantas);
+            estoqueMinimo = estoqueIdeal*0.6;
             soma = soma + valorPlanta;
             media = soma/quantidadePlantas;
             if(valorPlanta>valorMaior){
@@ -34,20 +38,30 @@ int main()
                 valorMenor = valorPlanta;
                 strcpy(plantaBarata,nomePlanta);
             }
-
-
         } else if (opcao == 2) {
             printf("Media dos valores das plantas = %f\n",media);
 
         } else if (opcao == 3) {
             printf("A planta mais cara = %s\n",plantaCara);
-            printf("O valor da planta mais cara = R$ %f\n",valorPlanta);
+            printf("O valor da planta mais cara = R$ %f\n",valorMaior);
 
         } else if (opcao == 4) {
+            printf("A planta mais barata = %s\n",plantaBarata);
+            printf("O valor da planta mais barata = R$ %f\n",valorMenor);
 
         } else if (opcao == 5) {
+            printf("O valor total das plantas compradas eh de R$ %f\n",soma);
 
         } else if (opcao == 6) {
+            printf("O estoque atual eh de %d unidades\n", estoqueAtual);
+            if (estoqueAtual < estoqueMinimo) {
+                printf("Eh necessario repor o estoque desta planta!\n");
+            } else if (estoqueAtual > estoqueMinimo) {
+                printf("O estoque desta planta ainda eh suficiente!\n");
+            } else if (estoqueAtual > estoqueIdeal) {
+                printf("O estoque desta planta esta acima do ideal!\n");
+            }
+        }else if (opcao == 7){
             break;
         } else{
             printf("Opcao invalida!");
