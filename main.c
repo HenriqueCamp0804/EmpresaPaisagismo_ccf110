@@ -11,7 +11,7 @@ int main()
 
     while (1) {
         printf("1 - Cadastrar planta\n");
-        printf("2 - Media das plantas\n");
+        printf("2 - Media dos valores das plantas\n");
         printf("3 - Planta mais cara\n");
         printf("4 - Planta mais barata\n");
         printf("5 - Valor total das plantas\n");
@@ -28,7 +28,7 @@ int main()
             scanf("%d",&quantidadePlantas);
             estoqueAtual = (quantidadeEstoque - quantidadePlantas);
             estoqueMinimo = estoqueIdeal*0.6;
-            soma = soma + valorPlanta;
+            soma = soma + (valorPlanta*quantidadePlantas);
             media = soma/quantidadePlantas;
             if(valorPlanta>valorMaior){
                 valorMaior = valorPlanta;
@@ -39,7 +39,7 @@ int main()
                 strcpy(plantaBarata,nomePlanta);
             }
         } else if (opcao == 2) {
-            printf("Media dos valores das plantas = %f\n",media);
+            printf("Media dos valores das plantas = %.2f\n",media);
 
         } else if (opcao == 3) {
             printf("A planta mais cara = %s\n",plantaCara);
@@ -50,7 +50,7 @@ int main()
             printf("O valor da planta mais barata = R$ %f\n",valorMenor);
 
         } else if (opcao == 5) {
-            printf("O valor total das plantas compradas eh de R$ %f\n",soma);
+            printf("O valor total das plantas compradas eh de R$ %.2f\n",soma);
 
         } else if (opcao == 6) {
             printf("O estoque atual eh de %d unidades\n", estoqueAtual);
