@@ -8,6 +8,9 @@ int main()
     char plantaCara[30],plantaBarata[30];
     float media,soma=0,valorPlanta;
     char nomePlanta[50];
+    float tabelaGastos[12][4],tabelaGanhos[12][4],tabelaLucro[12][4];
+    int j,mesAtual;
+    float ganhoParcial=0.0,gastoParcial=0.0,lucroParcial=0.0;
 
     while (1) {
         printf("1 - Cadastrar planta\n");
@@ -16,8 +19,9 @@ int main()
         printf("4 - Planta mais barata\n");
         printf("5 - Valor total das plantas\n");
         printf("6 - Verificar estoque\n");
-        printf("7 - Quantidade de clientes na semana:\n");
-        printf("8 - Sair\n");
+        printf("7 - Quantidade de clientes na semana\n");
+        printf("8 - Controle de faturamento parcial\n");
+        printf("9 - Sair\n");
         printf("Opcao: ");
         scanf("%d",&opcao);
         if (opcao == 1) {
@@ -75,13 +79,54 @@ int main()
             printf("A quantidade de clientes da semana foi de: %d\n",somaClientes);
 
         } else if(opcao == 8 ){
+            printf("Entre com o mês atual: ");
+            scanf("%d",&mesAtual);
+
+            for(i=0;i<mesAtual;i++){
+                for(j=0;j<4;j++){
+                    printf("Entre com os ganhos do mês %d,semana %d: ",i+1,j+1);
+                    scanf("%f",&tabelaGanhos[i][j]);
+                    ganhoParcial = ganhoParcial+tabelaGanhos[i][j];
+                }
+            }
+            for(i=0;i<mesAtual;i++){
+                for(j=0;j<4;j++){
+                    printf("Entre com os gastos do mês %d, semana %d: ",i+1,j+1);
+                    scanf("%f",&tabelaGastos[i][j]);
+                    gastoParcial = gastoParcial+tabelaGastos[i][j];
+                }
+            }
+            for(i=0;i<mesAtual;i++){
+                for(j=0;j<4;j++){
+                    tabelaLucro[i][j] = tabelaGanhos[i][j] - tabelaGastos[i][j];
+                    lucroParcial = lucroParcial+tabelaLucro[i][j];
+                }
+            }
+            printf("Tabela de Lucros Parcias: \n");
+            for(i=0;i<mesAtual;i++){
+                printf("\n");
+                for(j=0;j<4;j++){
+                    printf("%.2f ",tabelaLucro[i][j]);
+                }
+            }
+            printf("\n");
+            printf("Lucro parcial até o mês %d = %.2f\n",i+1,lucroParcial);
+            if(lucroParcial<ganhoParcial*0.6){
+                printf("Lucro abaixo do esperado, tente economizar mais!\n");
+            }
+            else{
+                printf("Lucro acima do esperado, continue assim!\n");
+            }
+
+        }else if(opcao == 9){
             break;
 
         }else{
-            printf("Opcao invalida!");
+            printf("Opcao invalida!\n");
         }
 
     }
+
 
 
 
